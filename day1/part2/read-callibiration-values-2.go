@@ -6,18 +6,17 @@ import "bufio"
 import "strconv"
 import "regexp"
 
-
 var letters_map = map[string]int{
-	"zero":0,
-	"one": 1,
-	"two": 2,
+	"zero":  0,
+	"one":   1,
+	"two":   2,
 	"three": 3,
-	"four": 4,
-	"five": 5,
+	"four":  4,
+	"five":  5,
 	"six":   6,
 	"seven": 7,
 	"eight": 8,
-	"nine": 9,
+	"nine":  9,
 }
 
 func check_error(err error) {
@@ -41,16 +40,15 @@ func is_numeric(word string) bool {
 	return regexp.MustCompile(`\d`).MatchString(word)
 }
 
-
 func is_number_in_letters(line string, index int) int {
-	for i := 1; i < 6 && index + i <= len(line); i++ {
-		substring := line[index: index+i];
-		value, check_existence := letters_map[substring];
-		if(check_existence){
-			return value;
+	for i := 1; i < 6 && index+i <= len(line); i++ {
+		substring := line[index : index+i]
+		value, check_existence := letters_map[substring]
+		if check_existence {
+			return value
 		}
 	}
-	return -1;
+	return -1
 }
 
 func get_sum_of_first_and_last_number_from_line(line string) int {
@@ -60,8 +58,8 @@ func get_sum_of_first_and_last_number_from_line(line string) int {
 		character := string(char)
 		if is_numeric(character) {
 			numbers = append(numbers, character)
-		}else if is_number_in_letters(line, index) != -1 {
-			numbers = append(numbers, convert_number_to_string(is_number_in_letters(line, index)));
+		} else if is_number_in_letters(line, index) != -1 {
+			numbers = append(numbers, convert_number_to_string(is_number_in_letters(line, index)))
 		}
 	}
 
